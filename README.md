@@ -9,13 +9,16 @@
     pip install jtyoui
     
     
+## 文档docs
+[点击查看文档](https://jtyoui.readthedocs.io/zh_CN/latest/)  
+
+
 ## 支持版本
     python 3.x
 
 ________________________
 
 ## 模块如下
-
 01. [任意进制转换](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/bs)  
 02. [验证码识别](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/code)  
 03. [数据下载](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/data)  
@@ -30,18 +33,17 @@ ________________________
 12. [新词发现](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/word)    
 13. [微信](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/wx)    
 14. [正则](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/regular)   
-15. [装饰器](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/decorator)
+15. [装饰器](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/decorators)
 16. [异常](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/error)        
 17. [地图](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/maps)
 18. [计算统计](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/statistics)  
 19. [贝叶斯算法](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/bayes)  
 20. [常见的工具类](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/tools) 
-21. [c模块](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/c)    
 22. [百度应用](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/baidu)   
 23. [日语单词翻译](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/jp)    
 24. [压缩包工具](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/compress)   
 25. [常用算法](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/algorithm)   
-26. [CMD命令](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/cmd)  
+26. [CMD命令](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/cmds)  
 27. [自然语言处理](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/neuralNetwork)  
 28. [反射模块](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/reflex)   
 29. [日志模块](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/logger)   
@@ -50,7 +52,12 @@ ________________________
 31. [口语化时间处理](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/time)   
 32. [机器学习模型](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/ml)  
 33. [爬虫模块](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/reptile)            
+34. [实体抽取](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/ee)    
+35. [flask框架模块](https://github.com/jtyoui/Jtyoui/tree/master/jtyoui/flasks)  
 
+## 单个模块实现地址(推荐)
+    https://github.com/pyunit
+    
 __________________________
 
 

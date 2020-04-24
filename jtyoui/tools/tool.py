@@ -8,36 +8,50 @@ import operator
 
 
 class Tool:
-    """自定义工具类"""
+    """自定义工具类
+
+    >>> tool = Tool('我家在贵州省遵义县的一个地方是虾子')
+    >>> i_s = tool.index_select_string('01056666600000056', '56+')
+    >>> print(i_s)
+    >>> tool.string = '我在这里、一、相亲最大的好处是。二、想要什么婚姻。三五、开放型的婚姻是凉鞋。'
+    >>> t_s = tool.split('[一二三四五六七八九十]+、', retain=False)
+    >>> print(t_s)
+    >>> tool.string = '我家在贵州省遵义县的一个地方是虾子'
+    >>> s_i = tool.string_select_index(ls=['贵州省', '遵义县', '虾子'], start_name='5', end_name='6')
+    >>> print(s_i)
+    >>> d = [[1, 2, 3],[1, 0, -1],[0, 1, 1]]
+    >>> print(tool.select_row(d, 1))  # [2, 0, 1]
+    >>> tool.generator = False
+    >>> print(tool.select_ls(['遵义县', '虾子']))
+    >>> tool.string = '9994599945545599945'
+    >>> ts = tool.search('(45+)+')
+    >>> print(ts.start(), ts.end(), ts.value())
+    >>> print(tool.string)
+    >>> tool.string = 'are you fuck!'
+    >>> print(tool.replace('[0-9a-zA-Z]', ''))
+    """
     generator = True
 
     def __init__(self, string):
         self._string = string
 
     def index_select_string(self, index, select):
-        """利用索引的关系来标记字符串"""
-        """
+        """利用索引的关系来标记字符串
+
         利用索引的关系来找字符串:一般用在深度学习中的标注模型
+
         :param index: 索引
-        :param string: 字符串
         :param select: 索引匹配的正则
         :return: 匹配字符串列表
         """
-        ls, string = [], self._string
         if len(index) != len(self._string):
             raise InconsistentLengthError("参数index和参数string长度不一致错误!")
-        while True:
-            s = re.search(select, index)
-            if s:
-                ls.append(string[s.start():s.end()])
-                index = index[s.start() + 1:]
-                string = string[s.start() + 1:]
-            else:
-                break
-        return ls
+        rf = re.finditer(select, index)
+        return [self._string[r.start():r.end()] for r in rf]
 
     @property
     def string(self):
+        """更新字符串"""
         return self._string
 
     @string.setter
@@ -46,47 +60,26 @@ class Tool:
 
     def split(self, re_, flag=0, retain=True):
         """支持正则分割
-        :param re_:正则表达式
+
+        :param re_: 正则表达式
         :param flag: re.search(re_, self.string, flag), 默认flag=0
         :param retain: 是否要保留正则匹配的字符,默认是保留
         """
-        ls_index, ls_word, string, end = [0], [], self._string, 0
-        while True:
-            match = re.search(re_, string, flag)
-            if match:
-                ls_index.append(match.start() + end)
-                end += match.end()
-                string = string[match.end():]
-            else:
-                break
-        if ls_index[-1] != len(self._string):
-            ls_index.append(len(self._string))
-        if ls_index[1] == 0:
-            ls_index.pop(0)
-        for index, value in enumerate(ls_index):
-            if index == len(ls_index) - 1:
-                break
-            ls_word.append(self._string[value:ls_index[index + 1]])
-        if not retain:
-            ls_words = []
-            for word in ls_word:
-                match = re.search(re_, word, flag)
-                if match:
-                    w = word[match.end():]
-                    if w:
-                        ls_words.append(w)
-                else:
-                    ls_words.append(word)
-            ls_word = ls_words
+        ls_word = re.split(pattern=re_, string=self._string, flags=flag)
+        if retain:
+            rs = re.finditer(pattern=re_, string=self._string, flags=flag)
+            for index, r in enumerate(rs, start=1):
+                ls_word[index] = r.group() + ls_word[index]
         return ls_word
 
     def string_select_index(self, ls, start_name, end_name, flag='O', labels=None):
         """将一段文字进行标记返回标记的列表
-        :param ls:标记的关键字列表
-        :param start_name:开始标记的名称
-        :param end_name:连续标记的名称
-        :param flag:不在关键字列表中默认标记，默认是O,大写的o
-        :param labels:自定义标记
+
+        :param ls: 标记的关键字列表
+        :param start_name: 开始标记的名称
+        :param end_name: 连续标记的名称
+        :param flag: 不在关键字列表中默认标记，默认是O,大写的o
+        :param labels: 自定义标记
         """
         if not labels:
             labels = [flag for _ in range(len(self._string))]
@@ -106,8 +99,9 @@ class Tool:
 
     def select_ls(self, ls_):
         """根据列表里面的元素选取字符串中的元素
-        :param ls_:列表元素，比如['张三','李四','王麻子']，string='张三去李四家找东西'
-        :return :['张三','李四']
+
+        :param ls_: 列表元素，比如['张三','李四','王麻子']，string='张三去李四家找东西'
+        :return: ['张三','李四']
         """
         if self.generator:
             return (name for name in ls_ if self._string.find(name) > 0)
@@ -116,8 +110,9 @@ class Tool:
 
     def select_row(self, iterable_, row):
         """选取可迭代对象中的某一列
-        :param iterable_:可迭代对象
-        :param row:每一列
+
+        :param iterable_: 可迭代对象
+        :param row: 每一列
         """
         g = operator.itemgetter(row)
         if self.generator:
@@ -140,7 +135,7 @@ class Tool:
             string = self.string[end_:]
             r = re.search(pattern, string, flags=flags)
 
-        class A:
+        class _:
 
             @staticmethod
             def start():
@@ -154,7 +149,7 @@ class Tool:
             def value():
                 return value
 
-        return A()
+        return _()
 
     def replace(self, pattern, repl, count=0, flags=0):
         """正则替换"""
@@ -165,7 +160,7 @@ if __name__ == '__main__':
     tool = Tool('我家在贵州省遵义县的一个地方是虾子')
     i_s = tool.index_select_string('01056666600000056', '56+')
     print(i_s)
-    tool.string = '我在这里、一、相亲最大的好处是。二、想要什么婚姻。三五、开放型的婚姻是凉鞋。三、'
+    tool.string = '我在这里、一、相亲最大的好处是。二、想要什么婚姻。三五、开放型的婚姻是凉鞋。'
     t_s = tool.split('[一二三四五六七八九十]+、', retain=False)
     print(t_s)
     tool.string = '我家在贵州省遵义县的一个地方是虾子'

@@ -14,6 +14,13 @@ import time
 
 
 class BaiDuWenKu:
+    """下载百度文库资料
+
+    url是下载百度文库的文档链接
+
+    >>> wk = BaiDuWenKu(url=r'https://wenku.baidu.com/view/f50def7c43323968001c924c.html?sxts=1563610333674')
+    >>> wk.load('D:')
+    """
 
     def __init__(self, url):
         """爬取百度文库：URL是文库资料地址"""
@@ -23,6 +30,7 @@ class BaiDuWenKu:
     def load(self, save_path):
         """
         下载资料
+
         :param save_path: 保存文件地址
         :return: 成功返回True
         """
@@ -40,9 +48,9 @@ class BaiDuWenKu:
         return False
 
     def get_title(self):
-        """
-        获得资料的标题和类型
-        :return:
+        """获得资料的标题和类型
+
+        :return: 返回类型、标题、数据
         """
         data = get(self.url).content.decode('gbk')
         types = re.findall(r'\'docType\': \'\w+\'', data)[0][12:-1]

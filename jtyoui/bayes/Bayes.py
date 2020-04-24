@@ -5,15 +5,23 @@
 
 
 class BayesProbability:
-    """贝叶斯"""
+    """贝叶斯
+
+    >>> bp = BayesProbability()
+    >>> bp['bowl_one'] = 1 / 2
+    >>> bp['bowl_two'] = 1 / 2
+    >>> bp.prior_probability('bowl_one', 3 / 4)
+    >>> bp.prior_probability('bowl_two', 1 / 2)
+    >>> print(bp.posterior_probability('bowl_one'))
+    """
 
     def __init__(self):
         self.name_prob = dict()
         self.name_prior_prob = dict()
 
     def __setitem__(self, name, prob):
-        """
-        初始化name的概率
+        """初始化name的概率
+
         :param name: 名字
         :param prob: 独立概率
         """
@@ -21,6 +29,7 @@ class BayesProbability:
 
     def prior_probability(self, name, prob):
         """先验概率
+
         :param name: 名字
         :param prob: 先验概率
         """

@@ -72,7 +72,12 @@ class _InfoSearch(HTMLParser):
 
 
 class BaiDuInfoSearch:
-    """百度百科搜索基本信息"""
+    """百度百科搜索基本信息
+
+    >>> bd = BaiDuInfoSearch('玛卡')
+    >>> print(bd.desc())
+    >>> print(bd.info())
+    """
 
     def __init__(self, data):
         if '<html>' not in data:
@@ -93,6 +98,7 @@ class BaiDuInfoSearch:
 
 def Load_BaiDuBaiKe(name):
     """下载百度百科里面的内容信息
+
     :param name: 百科百科名字
     :return: 百度百科的文本信息
     """

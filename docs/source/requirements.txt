@@ -1,0 +1,17 @@
+sphinx==1.8.*
+sphinx_rtd_theme==0.4.*
+recommonmark==0.5.*
+jtyoui
+requests
+click
+itchat
+pygame
+paddlepaddle
+PyMuPDF
+tensorflow
+regex
+keras
+sklearn
+arrow
+flask
+gevent

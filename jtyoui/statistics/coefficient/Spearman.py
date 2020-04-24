@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 # @Time  : 2019/3/21 15:07
 # @Author: Jtyoui@qq.com
-
-from jtyoui.decorator import parameter_set_length
+from jtyoui.decorators import parameter_set_length
 
 """
 斯皮尔曼相关系数
@@ -16,11 +15,11 @@ from jtyoui.decorator import parameter_set_length
 
 @parameter_set_length
 def spear_man_coefficient(sample_x, sample_y):
-    """
-    斯皮尔曼相关系数
+    """斯皮尔曼相关系数
+
     :param sample_x: x样本数据变量集合
     :param sample_y: y样本数据变量集合
-    :return:x和y的相关系数
+    :return: x和y的相关系数
     """
     n = len(sample_x)
     sort_x = sorted(sample_x)  # 排序
